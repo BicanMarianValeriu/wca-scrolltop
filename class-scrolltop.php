@@ -53,9 +53,10 @@ final class ScrollTop implements Integration {
 	 * Hooks
 	 */
 	public function register_hooks() {
-		add_action( 'admin_enqueue_scripts',    [ $this, 'admin_assets' ] );
+		add_action( 'admin_enqueue_scripts',	[ $this, 'admin_assets' ] );
 		add_action( 'wp_enqueue_scripts',       [ $this, 'assets' ], 0 );
 		add_action( 'wp_footer',                [ $this, 'markup' ], 0 );
+		add_action( 'admin_init',				[ $this, 'insert_defaults'	] );
 	}
 
 	/**
@@ -227,7 +228,9 @@ final class ScrollTop implements Integration {
 	 * @return void
 	 */
 	public function admin_assets() {
-		if( ! current_user_can( 'activate_plugins' ) ) return;
+		if( ! wecodeart_if( 'is_theme_admin' ) || ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
 
 		wp_register_script( 
 			$this->make_handle(),
@@ -253,6 +256,19 @@ final class ScrollTop implements Integration {
 		$file_path = wecodeart_config( 'paths' )['uri'] . '/inc/support/modules/scrolltop/assets/' . $file_path . '/' . $type . '/' . $file_name;
 
 		return esc_url( $file_path );
+	}
+
+	/**
+	 * Insert defaults.
+	 *
+	 * @return 	void
+	 */
+	public function insert_defaults() {
+		if( ! wecodeart_option( 'scrolltop' ) ) {
+			wecodeart_option( [
+				'scrolltop' => self::get_defaults()
+			] );
+		}
 	}
 
     /**

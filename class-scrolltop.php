@@ -161,9 +161,6 @@ final class ScrollTop implements Integration {
 					this.change = this.to - this.start;
 					this.startTime = performance.now();
 
-					console.log(this.change)
-					console.log(this.startTime)
-
 					return window.requestAnimationFrame(this.loop.bind(this));
 				},
 

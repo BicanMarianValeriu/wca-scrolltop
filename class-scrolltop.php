@@ -51,10 +51,10 @@ final class ScrollTop implements Integration {
 	 * Hooks
 	 */
 	public function register_hooks() {
+		\add_action( 'admin_init',				[ $this, 'insert_defaults'	] );
 		\add_action( 'admin_enqueue_scripts',	[ $this, 'admin_assets' ] );
 		\add_action( 'wp_enqueue_scripts',		[ $this, 'front_assets' ], 0 );
 		\add_action( 'wp_footer',				[ $this, 'markup' ], 0 );
-		\add_action( 'admin_init',				[ $this, 'insert_defaults'	] );
 	}
 
 	/**
@@ -62,7 +62,7 @@ final class ScrollTop implements Integration {
 	 *
 	 * @return 	void
 	 */
-	public function markup() {
+	public function markup(): void {
 		$scrollOffset	= intval( get_prop( $this->config, [ 'scroll', 'offset' ], 0 ) );
 		$scrollDuration	= intval( get_prop( $this->config, [ 'scroll', 'duration' ], 400 ) );
 		$elOffset		= intval( get_prop( $this->config, [ 'element', 'offset' ], 0 ) );
@@ -123,7 +123,7 @@ final class ScrollTop implements Integration {
 	 *
 	 * @return 	void
 	 */
-	public function front_assets() {
+	public function front_assets(): void {
 		// Utilities classes
 		$classes = get_prop( $this->config, 'classes', '' );
 		if( $classes ) {
@@ -202,7 +202,7 @@ final class ScrollTop implements Integration {
 	 *
 	 * @return void
 	 */
-	public function admin_assets() {
+	public function admin_assets(): void {
 		if( ! wecodeart_if( 'is_theme_admin' ) || ! current_user_can( 'activate_plugins' ) ) {
 			return;
 		}
@@ -238,7 +238,7 @@ final class ScrollTop implements Integration {
 	 *
 	 * @return 	void
 	 */
-	public function insert_defaults() {
+	public function insert_defaults(): void {
 		if( ! wecodeart_option( 'scrolltop' ) ) {
 			wecodeart_option( [
 				'scrolltop' => self::get_defaults()

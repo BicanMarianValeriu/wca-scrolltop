@@ -8,20 +8,17 @@
  * @package 	WeCodeArt Framework
  * @subpackage 	Support\Modules\ScrollTop
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
- * @since 		6.3.0
- * @version		6.3.0
+ * @since 		6.4.5
+ * @version		6.4.5
  */
 
 namespace WeCodeArt\Support\Modules;
 
 defined( 'ABSPATH' ) || exit;
 
-use WeCodeArt\Singleton;
-use WeCodeArt\Integration;
-use WeCodeArt\Config\Traits\Asset;
-use WeCodeArt\Conditional\Traits\No_Conditionals;
-use function WeCodeArt\Functions\toJSON;
-use function WeCodeArt\Functions\get_prop;
+use WeCodeArt\{ Singleton, Integration };
+use WeCodeArt\Config\Traits\{ Asset, No_Conditionals };
+use function WeCodeArt\Functions\{ get_prop, toJSON };
 
 /**
  * The ScrollTop object.
@@ -54,10 +51,10 @@ final class ScrollTop implements Integration {
 	 * Hooks
 	 */
 	public function register_hooks() {
-		add_action( 'admin_enqueue_scripts',	[ $this, 'admin_assets' ] );
-		add_action( 'wp_enqueue_scripts',       [ $this, 'assets' ], 0 );
-		add_action( 'wp_footer',                [ $this, 'markup' ], 0 );
-		add_action( 'admin_init',				[ $this, 'insert_defaults'	] );
+		\add_action( 'admin_enqueue_scripts',	[ $this, 'admin_assets' ] );
+		\add_action( 'wp_enqueue_scripts',		[ $this, 'front_assets' ], 0 );
+		\add_action( 'wp_footer',				[ $this, 'markup' ], 0 );
+		\add_action( 'admin_init',				[ $this, 'insert_defaults'	] );
 	}
 
 	/**
@@ -66,13 +63,12 @@ final class ScrollTop implements Integration {
 	 * @return 	void
 	 */
 	public function markup() {
-		$is_interactive = function_exists( 'wp_enqueue_script_module' );
 		$scrollOffset	= intval( get_prop( $this->config, [ 'scroll', 'offset' ], 0 ) );
 		$scrollDuration	= intval( get_prop( $this->config, [ 'scroll', 'duration' ], 400 ) );
 		$elOffset		= intval( get_prop( $this->config, [ 'element', 'offset' ], 0 ) );
 		$elSelector		= get_prop( $this->config, [ 'element', 'selector' ], 'html' );
 
-		wecodeart( 'markup' )->SVG::add( 'scrolltop', get_prop( $this->config, 'icon' ) );
+		\wecodeart( 'markup' )->SVG::add( 'scrolltop', get_prop( $this->config, 'icon' ) );
 
 		$classes = wp_parse_args(
 			explode( ' ', get_prop( $this->config, 'classes', '' ) ),
@@ -83,115 +79,43 @@ final class ScrollTop implements Integration {
 		$inline_css .= 'opacity:' . ( $scrollOffset === 0 ? '1' : '0' ) . ';';
 		$inline_css .= 'pointer-events:' . ( $scrollOffset === 0 ? 'all' : 'none' );
 
-		$attributes = [];
-
-		if( $is_interactive ) {
-			$attributes = wp_parse_args( [
-				'data-wp-context' 			=> toJSON( array_filter( [
-					'showOffset'=> $scrollOffset,
-					'duration' 	=> $scrollDuration,
-					'target' 	=> $elSelector,
-					'offset'	=> $elOffset
-				] ) ),
-				'data-wp-interactive' 		=> 'wecodeart/scrolltop',
-				'data-wp-on--click'			=> 'actions.animateScoll',
-				'data-wp-watch'				=> 'callbacks.visibility',
-				'data-wp-init--validate'	=> 'callbacks.validateConfig',
-				'data-wp-init--scroll'		=> 'actions.onScroll',
-				'data-wp-on-window--scroll'	=> 'actions.onScroll',
-			], $attributes );
-		}
-
-		$attributes = wp_parse_args( [
+		$attributes = [
 			'class'			=> join( ' ', array_filter( $classes ) ),
-			'type'			=> 'button',
+			'data-wp-context' 			=> toJSON( array_filter( [
+				'showOffset'=> $scrollOffset,
+				'duration' 	=> $scrollDuration,
+				'target' 	=> $elSelector,
+				'offset'	=> $elOffset
+			] ) ),
+			'data-wp-interactive' 		=> 'wecodeart/scrolltop',
+			'data-wp-on--click'			=> 'actions.animateScoll',
+			'data-wp-watch'				=> 'callbacks.visibility',
+			'data-wp-init--validate'	=> 'callbacks.validateConfig',
+			'data-wp-init--scroll'		=> 'actions.onScroll',
+			'data-wp-on-window--scroll'	=> 'actions.onScroll',
 			'aria-label' 	=> esc_html__( 'Scroll to top', 'wca-scrolltop' ),
+			'type'			=> 'button',
 			'style'			=> $inline_css,
-		], $attributes );
+		];
 
-		wecodeart_input( 'button', [
+		\wecodeart_input( 'button', [
 			'label' => wecodeart( 'markup' )->SVG::compile( 'scrolltop' ),
 			'attrs' => $attributes
 		] );
 
-		if( $is_interactive ) {
-			\wp_interactivity_state( 'wecodeart/scrolltop', apply_filters( 'wecodeart/filter/interactive/state/scrolltop', [
-				'showOffset'=> 100,
-				'duration'	=> 400,
-				'target'	=> '',
-				'offset'	=> 0,
-			] ) );
-				
-			\wp_interactivity_config( 'wecodeart/scrolltop', [
-				'showOffset'=> '(null|number)',
-				'duration'	=> '(null|number)',
-				'target' 	=> '(null|element|string)',
-				'offset' 	=> '(null|number)',
-			] );
-
-			return;
-		}
-
-		$inline_js = <<<JS
-			const ScrollTop = {
-				el: document.querySelector('.wp-element-button--scrolltop'),
-				target: document.querySelector('$elSelector'),
-				to: 0,
-				fps: 60,
-				start: 0,
-				change: 0,
-				duration: 0,
-				elapsedTime: 0,
-
-				init: function() {
-					const scrollListener = () => window.scrollY >= $scrollOffset ? this.fade(true) : this.fade();
-					const clickListener = () => this.animate((this.target ? this.target.offsetTop : 0) - $elOffset, $scrollDuration);
-
-					scrollListener();
-
-					window.addEventListener('scroll', scrollListener);
-
-					this.el.addEventListener('click', clickListener, true);
-				},
-
-				animate: function(to, duration) {
-					this.to = to;
-					this.duration = duration;
-					this.start = document.documentElement.scrollTop || document.body.scrollTop;
-					this.change = this.to - this.start;
-					this.startTime = performance.now();
-
-					return window.requestAnimationFrame(this.loop.bind(this));
-				},
-
-				loop: function(timestamp) {
-					const elapsedTime = timestamp - this.startTime;
-					const position = this.easing(elapsedTime, this.start, this.change, this.duration);
-
-					document.documentElement.scrollTop = position;
-					document.body.scrollTop = position;
-
-					if (elapsedTime < this.duration) {
-						window.requestAnimationFrame(this.loop.bind(this));
-					}
-				},
-
-				easing: function(currentTime, start, change, duration) {
-					currentTime /= duration;
-					return -change * currentTime * (currentTime - 2) + start;
-				},
-
-				fade: function(dir) {
-					this.el.classList[dir ? 'add' : 'remove']('wp-element-button--appear');
-					this.el.style.opacity = dir ? 'var(--wp--opacity)' : 0;
-					this.el.style.pointerEvents = dir ? 'all' : 'none';
-				}
-			};
-
-			ScrollTop.init();
-		JS;
-		
-		printf( '<script id="wecodeart-scrolltop-js">%s</script>', $inline_js );
+		\wp_interactivity_state( 'wecodeart/scrolltop', apply_filters( 'wecodeart/filter/interactive/state/scrolltop', [
+			'showOffset'=> 100,
+			'duration'	=> 400,
+			'target'	=> '',
+			'offset'	=> 0,
+		] ) );
+			
+		\wp_interactivity_config( 'wecodeart/scrolltop', [
+			'showOffset'=> '(null|number)',
+			'duration'	=> '(null|number)',
+			'target' 	=> '(null|element|string)',
+			'offset' 	=> '(null|number)',
+		] );
 	}
 
 	/**
@@ -199,7 +123,7 @@ final class ScrollTop implements Integration {
 	 *
 	 * @return 	void
 	 */
-	public function assets() {
+	public function front_assets() {
 		// Utilities classes
 		$classes = get_prop( $this->config, 'classes', '' );
 		if( $classes ) {
@@ -257,21 +181,20 @@ final class ScrollTop implements Integration {
 		] );
 
 		// Load Styles
-		wp_style_engine_get_styles( $rules, [
+		\wp_style_engine_get_styles( $rules, [
 			'selector' 	=> '.wp-element-button--scrolltop',
 			'context'	=> self::CONTEXT
 		] );
 
-		if( function_exists( 'wp_enqueue_script_module' ) ) {
-			\wp_register_script_module(
-				'@wecodeart/scrolltop',
-				$this->get_asset( 'js', 'scrolltop' ),
-				[ '@wordpress/interactivity' ],
-				wecodeart( 'version' )
-			);
-	
-			\wp_enqueue_script_module( '@wecodeart/scrolltop' );
-		}
+		// Load Scripts
+		\wp_register_script_module(
+			'@wecodeart/scrolltop',
+			$this->get_asset( 'js', 'scrolltop' ),
+			[ '@wordpress/interactivity' ],
+			wecodeart( 'version' )
+		);
+
+		\wp_enqueue_script_module( '@wecodeart/scrolltop' );
 	}
 
     /**
@@ -284,7 +207,7 @@ final class ScrollTop implements Integration {
 			return;
 		}
 
-		wp_register_script( 
+		\wp_register_script( 
 			$this->make_handle(),
 			$this->get_asset( 'js', 'admin' ),
 			[ 'wecodeart-admin', 'wp-block-editor' ],
@@ -292,9 +215,9 @@ final class ScrollTop implements Integration {
 			true 
 		);
 
-		wp_enqueue_script( $this->make_handle() );
+		\wp_enqueue_script( $this->make_handle() );
 
-		wp_set_script_translations( $this->make_handle(), 'wecodeart', wecodeart_config( 'directories' )['languages'] );
+		\wp_set_script_translations( $this->make_handle(), 'wecodeart', wecodeart_config( 'directories' )['languages'] );
 	}
 
 	/**

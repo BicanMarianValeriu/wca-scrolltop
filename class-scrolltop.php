@@ -9,7 +9,7 @@
  * @subpackage 	Support\Modules\ScrollTop
  * @copyright   Copyright (c) 2024, WeCodeArt Framework
  * @since 		6.4.5
- * @version		6.4.5
+ * @version		6.5.7
  */
 
 namespace WeCodeArt\Support\Modules;
@@ -147,7 +147,14 @@ final class ScrollTop implements Integration {
 		// Position
 		$positions = wp_array_slice_assoc( $styles, [ 'top', 'bottom', 'left', 'right' ] );
 		$positions = array_map( fn( $i ) => $i . 'px', $positions );
-		unset( $positions[ get_prop( $this->config, 'position', 'right' ) === 'left' ? 'right' : 'left' ] );
+		$direction = get_prop( $this->config, 'position', 'right' );
+		
+		if( $direction === 'right' ) {
+			$position = get_prop( $positions, [ $direction ] );
+			$positions['right'] = "calc({$position} + var(--wp--scrollbar-width, 0px))";
+		}
+
+		unset( $positions[ $direction === 'left' ? 'right' : 'left' ] );
 		\WP_Style_Engine::store_css_rule( self::CONTEXT, '.wp-element-button--scrolltop', $positions );
 
 		// Dimensions

@@ -1,4 +1,4 @@
-/******/ (function() { // webpackBootstrap
+/******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
@@ -6,19 +6,16 @@
 /*!******************************************************************!*\
   !*** ./inc/support/modules/scrolltop/src/js/admin/Components.js ***!
   \******************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   CustomIconsControl: function() { return /* binding */ CustomIconsControl; },
-/* harmony export */   PreviewButton: function() { return /* binding */ PreviewButton; }
+/* harmony export */   CustomIconsControl: () => (/* binding */ CustomIconsControl),
+/* harmony export */   PreviewButton: () => (/* binding */ PreviewButton)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./functions */ "./inc/support/modules/scrolltop/src/js/admin/functions.js");
-
-
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./functions */ "./inc/support/modules/scrolltop/src/js/admin/functions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
 const {
   i18n: {
     __
@@ -40,6 +37,7 @@ const {
   }
 } = wp;
 
+
 const DEFAULT_ICONS = [{
   viewBox: '0 0 16 16',
   paths: ['M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z']
@@ -60,12 +58,11 @@ const DEFAULT_ICONS = [{
 /**
  * Custom Icons 
  */
-const CustomIconsControl = _ref => {
-  let {
-    formData,
-    setFormData,
-    ...restProps
-  } = _ref;
+const CustomIconsControl = ({
+  formData,
+  setFormData,
+  ...restProps
+}) => {
   const {
     baseControlProps,
     controlProps
@@ -121,98 +118,114 @@ const CustomIconsControl = _ref => {
       }
     });
   };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BaseControl, baseControlProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
-    style: {
-      marginTop: 0
-    }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ButtonGroup, null, DEFAULT_ICONS.map(item => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
-    isPrimary: JSON.stringify(item) === JSON.stringify(icon),
-    onClick: () => handleSelect(item)
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Icon, {
-    icon: () => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("svg", {
-        xmlns: "http://www.w3.org/2000/svg",
-        viewBox: item?.viewBox,
-        height: 16
-      }, item?.paths.map(el => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("path", {
-        fill: "currentColor",
-        d: el
-      })));
-    }
-  }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
-    style: {
-      marginTop: 0
-    }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(HStack, {
-    style: {
-      alignItems: 'stretch'
-    }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(TextControl, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, controlProps, {
-    disabled: disabled,
-    className: "flex-grow-1",
-    placeholder: __('ViewBox', 'wca-scrolltop'),
-    value: viewBox,
-    onChange: setViewBox
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
-    disabled: disabled,
-    style: {
-      height: 'initial'
-    },
-    isSecondary: true,
-    isSmall: true,
-    onClick: () => {
-      setFormData({
-        ...formData,
-        icon: {
-          ...formData.icon,
-          viewBox
-        }
-      });
-    },
-    showTooltip: true
-  }, __('Update SVG viewBox', 'wca-scrolltop')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
-    style: {
-      marginTop: 0
-    }
-  }, paths.map((item, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
-    style: {
-      marginTop: 0
-    }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(HStack, {
-    key: index,
-    style: {
-      alignItems: 'stretch'
-    }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(TextControl, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, controlProps, {
-    disabled: disabled,
-    className: "flex-grow-1",
-    placeholder: __('Path', 'wca-scrolltop'),
-    value: item,
-    onChange: value => updateItem(index, value)
-  })), index !== 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
-    disabled: disabled,
-    style: {
-      height: 'initial'
-    },
-    isDestructive: true,
-    isSmall: true,
-    onClick: () => removeItem(index)
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Dashicon, {
-    icon: "no"
-  })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
-    disabled: disabled,
-    isPrimary: true,
-    onClick: addItem
-  }, __('Add Path', 'wca-scrolltop')));
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(BaseControl, {
+    ...baseControlProps,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+      style: {
+        marginTop: 0
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ButtonGroup, {
+        children: DEFAULT_ICONS.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+          isPrimary: JSON.stringify(item) === JSON.stringify(icon),
+          onClick: () => handleSelect(item),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Icon, {
+            icon: () => {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+                xmlns: "http://www.w3.org/2000/svg",
+                viewBox: item?.viewBox,
+                height: 16,
+                children: item?.paths.map(el => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+                  fill: "currentColor",
+                  d: el
+                }))
+              });
+            }
+          })
+        }))
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+      style: {
+        marginTop: 0
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(HStack, {
+        style: {
+          alignItems: 'stretch'
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TextControl, {
+          ...controlProps,
+          disabled: disabled,
+          className: "flex-grow-1",
+          placeholder: __('ViewBox', 'wca-scrolltop'),
+          value: viewBox,
+          onChange: setViewBox
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+          disabled: disabled,
+          style: {
+            height: 'initial'
+          },
+          isSecondary: true,
+          isSmall: true,
+          onClick: () => {
+            setFormData({
+              ...formData,
+              icon: {
+                ...formData.icon,
+                viewBox
+              }
+            });
+          },
+          showTooltip: true,
+          children: __('Update SVG viewBox', 'wca-scrolltop')
+        })]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+      style: {
+        marginTop: 0
+      },
+      children: paths.map((item, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        style: {
+          marginTop: 0
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(HStack, {
+          style: {
+            alignItems: 'stretch'
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TextControl, {
+            ...controlProps,
+            disabled: disabled,
+            className: "flex-grow-1",
+            placeholder: __('Path', 'wca-scrolltop'),
+            value: item,
+            onChange: value => updateItem(index, value)
+          }), index !== 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+            disabled: disabled,
+            style: {
+              height: 'initial'
+            },
+            isDestructive: true,
+            isSmall: true,
+            onClick: () => removeItem(index),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Dashicon, {
+              icon: "no"
+            })
+          })]
+        }, index)
+      }))
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+      disabled: disabled,
+      isPrimary: true,
+      onClick: addItem,
+      children: __('Add Path', 'wca-scrolltop')
+    })]
+  });
 };
 
 /**
  * Custom Icons 
  */
-const PreviewButton = _ref2 => {
-  let {
-    formData
-  } = _ref2;
+const PreviewButton = ({
+  formData
+}) => {
   const {
     icon: {
       viewBox = '0 0 16 16',
@@ -224,23 +237,22 @@ const PreviewButton = _ref2 => {
     classes = ''
   } = formData;
   const [disabledButton, setDisabledButton] = useState(window.scrollY < offset);
-  const generateStyles = function () {
-    let {
-      position,
-      style: {
-        padding,
-        border = {},
-        borderRadius,
-        opacity,
-        width,
-        height,
-        left = 'initial',
-        right = 'initial',
-        bottom = 0,
-        backgroundColor = 'transparent',
-        color = 'inherit'
-      } = {}
-    } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  const generateStyles = ({
+    position,
+    style: {
+      padding,
+      border = {},
+      borderRadius,
+      opacity,
+      width,
+      height,
+      left = 'initial',
+      right = 'initial',
+      bottom = 0,
+      backgroundColor = 'transparent',
+      color = 'inherit'
+    } = {}
+  } = {}) => {
     let style = {
       position: 'fixed',
       zIndex: disabledButton ? -1 : 5,
@@ -265,7 +277,7 @@ const PreviewButton = _ref2 => {
         const dirStyles = border[dir];
         borderStyles = {
           ...borderStyles,
-          [`border${(0,_functions__WEBPACK_IMPORTED_MODULE_2__.capitalizeWord)(dir)}`]: Object.values(dirStyles).join(' ')
+          [`border${(0,_functions__WEBPACK_IMPORTED_MODULE_0__.capitalizeWord)(dir)}`]: Object.values(dirStyles).join(' ')
         };
       }
     } else {
@@ -294,24 +306,27 @@ const PreviewButton = _ref2 => {
     // Cleanup
     return () => window.removeEventListener('scroll', handleScroll);
   }, [offset]);
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Tooltip, {
-    text: __('Preview', 'wca-scrolltop')
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
-    className: classes,
-    style: generateStyles(formData)
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Icon, {
-    icon: () => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("svg", {
-        xmlns: "http://www.w3.org/2000/svg",
-        viewBox: viewBox
-      }, paths.map(el => {
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("path", {
-          fill: "currentColor",
-          d: el
-        });
-      }));
-    }
-  })));
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Tooltip, {
+    text: __('Preview', 'wca-scrolltop'),
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+      className: classes,
+      style: generateStyles(formData),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Icon, {
+        icon: () => {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+            xmlns: "http://www.w3.org/2000/svg",
+            viewBox: viewBox,
+            children: paths.map(el => {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+                fill: "currentColor",
+                d: el
+              });
+            })
+          });
+        }
+      })
+    })
+  });
 };
 
 
@@ -321,11 +336,11 @@ const PreviewButton = _ref2 => {
 /*!*****************************************************************!*\
   !*** ./inc/support/modules/scrolltop/src/js/admin/functions.js ***!
   \*****************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   capitalizeWord: function() { return /* binding */ capitalizeWord; }
+/* harmony export */   capitalizeWord: () => (/* binding */ capitalizeWord)
 /* harmony export */ });
 /**
  * Capitalize Word
@@ -337,40 +352,13 @@ const capitalizeWord = word => `${word.charAt(0).toUpperCase()}${word.slice(1)}`
 
 /***/ }),
 
-/***/ "@wordpress/element":
-/*!*********************************!*\
-  !*** external ["wp","element"] ***!
-  \*********************************/
-/***/ (function(module) {
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+/***/ ((module) => {
 
-module.exports = window["wp"]["element"];
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
-  \************************************************************/
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ _extends; }
-/* harmony export */ });
-function _extends() {
-  _extends = Object.assign ? Object.assign.bind() : function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends.apply(this, arguments);
-}
+module.exports = window["ReactJSXRuntime"];
 
 /***/ })
 
@@ -402,57 +390,56 @@ function _extends() {
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = function(module) {
+/******/ 		__webpack_require__.n = (module) => {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				function() { return module['default']; } :
-/******/ 				function() { return module; };
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/define property getters */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 		__webpack_require__.d = (exports, definition) => {
 /******/ 			for(var key in definition) {
 /******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	!function() {
-/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
-/******/ 	}();
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = function(exports) {
+/******/ 		__webpack_require__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-!function() {
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
 /*!*******************************************************!*\
   !*** ./inc/support/modules/scrolltop/src/js/admin.js ***!
   \*******************************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _admin_Components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/Components */ "./inc/support/modules/scrolltop/src/js/admin/Components.js");
-
+/* harmony import */ var _admin_Components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./admin/Components */ "./inc/support/modules/scrolltop/src/js/admin/Components.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
 /**
  * @package: 	WeCodeArt CF7 Extension
  * @author: 	Bican Marian Valeriu
@@ -494,12 +481,15 @@ const {
   }
 } = wp;
 
+
 addFilter('wecodeart.admin.tabs.plugins', 'wecodeart/scrolltop/admin/panel', optionsPanel);
 function optionsPanel(panels) {
   return [...panels, {
     name: 'wca-scrolltop',
     title: __('Scroll Top', 'wca-scrolltop'),
-    render: props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Options, props)
+    render: props => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Options, {
+      ...props
+    })
   }];
 }
 const Options = props => {
@@ -510,22 +500,18 @@ const Options = props => {
     createNotice
   } = props;
   if (isRequesting || !settings) {
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Placeholder, {
-      icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Spinner, null),
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Placeholder, {
+      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Spinner, {}),
       label: __('Loading', 'wca-scrolltop'),
       instructions: __('Please wait, loading settings...', 'wca-scrolltop')
     });
   }
-  const apiOptions = (_ref => {
-    let {
-      scrolltop
-    } = _ref;
-    return scrolltop;
-  })(settings);
+  const apiOptions = (({
+    scrolltop
+  }) => scrolltop)(settings);
   const [loading, setLoading] = useState(null);
   const [formData, setFormData] = useState(apiOptions);
-  const setStyle = function () {
-    let extra = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  const setStyle = (extra = {}) => {
     const newStyle = {
       ...formData?.style,
       ...extra
@@ -540,271 +526,325 @@ const Options = props => {
     return createNotice('success', __('Settings saved.', 'wca-scrolltop'));
   };
   const colors = useSetting('color.palette');
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid",
-    style: {
-      '--wca--columns': 2
-    }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "g-col-1"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, {
-    className: "border shadow-none"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h5", {
-    className: "text-uppercase fw-medium m-0"
-  }, __('Design', 'wca-scrolltop'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, {
-    style: {
-      color: 'rgb(30, 30, 30)'
-    }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_admin_Components__WEBPACK_IMPORTED_MODULE_1__.CustomIconsControl, {
-    formData,
-    setFormData,
-    label: __('Icon', 'wca-scrolltop'),
-    help: __('Use simple icons like FontAwesome or Bootstrap. Each icon can have 1 or more path elements.', 'wca-scrolltop')
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectControl, {
-    label: __('Position', 'wca-scrolltop'),
-    value: formData?.position,
-    options: [{
-      label: __('Left', 'wca-scrolltop'),
-      value: 'left'
-    }, {
-      label: __('Right', 'wca-scrolltop'),
-      value: 'right'
-    }],
-    onChange: position => setFormData({
-      ...formData,
-      position
-    }),
-    __nextHasNoMarginBottom: true
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(HStack, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(NumberControl, {
-    isShiftStepEnabled: true,
-    spinControls: "custom",
-    label: __('Horizontal Margin', 'wca-scrolltop'),
-    help: __('Number of pixels for horizontal window distance.', 'wca-scrolltop'),
-    min: 0,
-    value: formData?.style?.[formData?.position],
-    onChange: value => setStyle({
-      [formData?.position]: parseInt(value)
-    })
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(NumberControl, {
-    isShiftStepEnabled: true,
-    spinControls: "custom",
-    label: __('Vertical Margin', 'wca-scrolltop'),
-    help: __('Number of pixels for vertical window distance.', 'wca-scrolltop'),
-    min: 0,
-    value: formData?.style?.bottom,
-    onChange: bottom => setStyle({
-      bottom: parseInt(bottom)
-    })
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(NumberControl, {
-    isShiftStepEnabled: true,
-    spinControls: "custom",
-    label: __('Size', 'wca-scrolltop'),
-    min: 20,
-    value: formData?.style?.width,
-    onChange: size => setStyle({
-      width: parseInt(size),
-      height: parseInt(size)
-    }),
-    help: __('In pixels.', 'wca-scrolltop')
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(NumberControl, {
-    isShiftStepEnabled: true,
-    spinControls: "custom",
-    label: __('Padding', 'wca-scrolltop'),
-    min: 0,
-    value: formData?.style?.padding,
-    onChange: padding => setStyle({
-      padding: parseInt(padding)
-    }),
-    help: __('In pixels.', 'wca-scrolltop')
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RangeControl, {
-    label: __('Opacity', 'wca-scrolltop'),
-    value: formData?.style?.opacity,
-    onChange: opacity => setStyle({
-      opacity: parseInt(opacity)
-    }),
-    min: 0,
-    step: 5,
-    max: 100
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(BaseControl, {
-    label: __('Colors', 'wca-scrolltop')
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(HStack, {
-    style: {
-      justifyContent: 'flex-start'
-    }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(DropdownMenu, {
-    label: __('Background Color', 'wca-scrolltop'),
-    icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(ColorIndicator, {
-      colorValue: formData?.style?.backgroundColor
-    }),
-    toggleProps: {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "grid",
       style: {
-        height: 'initial',
-        minWidth: 'initial',
-        padding: 0
-      }
-    },
-    popoverProps: {
-      focusOnMount: 'container',
-      position: 'bottom',
-      noArrow: false
-    }
-  }, () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(ColorPicker, {
-    color: formData?.style?.backgroundColor,
-    onChange: backgroundColor => setStyle({
-      backgroundColor
-    }),
-    enableAlpha: true,
-    defaultValue: "#000"
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(DropdownMenu, {
-    label: __('Icon Color', 'wca-scrolltop'),
-    icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(ColorIndicator, {
-      colorValue: formData?.style?.color
-    }),
-    toggleProps: {
+        '--wca--columns': 2
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "g-col-1",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(Card, {
+          className: "border shadow-none",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(CardHeader, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h5", {
+              className: "text-uppercase fw-medium m-0",
+              children: __('Design', 'wca-scrolltop')
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(CardBody, {
+            style: {
+              color: 'rgb(30, 30, 30)'
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_admin_Components__WEBPACK_IMPORTED_MODULE_0__.CustomIconsControl, {
+                formData,
+                setFormData,
+                label: __('Icon', 'wca-scrolltop'),
+                help: __('Use simple icons like FontAwesome or Bootstrap. Each icon can have 1 or more path elements.', 'wca-scrolltop')
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(SelectControl, {
+                label: __('Position', 'wca-scrolltop'),
+                value: formData?.position,
+                options: [{
+                  label: __('Left', 'wca-scrolltop'),
+                  value: 'left'
+                }, {
+                  label: __('Right', 'wca-scrolltop'),
+                  value: 'right'
+                }],
+                onChange: position => setFormData({
+                  ...formData,
+                  position
+                })
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(HStack, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(NumberControl, {
+                  isShiftStepEnabled: true,
+                  spinControls: "custom",
+                  label: __('Horizontal Margin', 'wca-scrolltop'),
+                  help: __('Number of pixels for horizontal window distance.', 'wca-scrolltop'),
+                  min: 0,
+                  value: formData?.style?.[formData?.position],
+                  onChange: value => setStyle({
+                    [formData?.position]: parseInt(value)
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(NumberControl, {
+                  isShiftStepEnabled: true,
+                  spinControls: "custom",
+                  label: __('Vertical Margin', 'wca-scrolltop'),
+                  help: __('Number of pixels for vertical window distance.', 'wca-scrolltop'),
+                  min: 0,
+                  value: formData?.style?.bottom,
+                  onChange: bottom => setStyle({
+                    bottom: parseInt(bottom)
+                  })
+                })]
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(NumberControl, {
+                isShiftStepEnabled: true,
+                spinControls: "custom",
+                label: __('Size', 'wca-scrolltop'),
+                min: 20,
+                value: formData?.style?.width,
+                onChange: size => setStyle({
+                  width: parseInt(size),
+                  height: parseInt(size)
+                }),
+                help: __('In pixels.', 'wca-scrolltop')
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(NumberControl, {
+                isShiftStepEnabled: true,
+                spinControls: "custom",
+                label: __('Padding', 'wca-scrolltop'),
+                min: 0,
+                value: formData?.style?.padding,
+                onChange: padding => setStyle({
+                  padding: parseInt(padding)
+                }),
+                help: __('In pixels.', 'wca-scrolltop')
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RangeControl, {
+                label: __('Opacity', 'wca-scrolltop'),
+                value: formData?.style?.opacity,
+                onChange: opacity => setStyle({
+                  opacity: parseInt(opacity)
+                }),
+                min: 0,
+                step: 5,
+                max: 100
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(BaseControl, {
+                label: __('Colors', 'wca-scrolltop'),
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(HStack, {
+                  style: {
+                    justifyContent: 'flex-start'
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(DropdownMenu, {
+                    label: __('Background Color', 'wca-scrolltop'),
+                    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ColorIndicator, {
+                      colorValue: formData?.style?.backgroundColor
+                    }),
+                    toggleProps: {
+                      style: {
+                        height: 'initial',
+                        minWidth: 'initial',
+                        padding: 0
+                      }
+                    },
+                    popoverProps: {
+                      focusOnMount: 'container',
+                      position: 'bottom',
+                      noArrow: false
+                    },
+                    children: () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ColorPicker, {
+                      color: formData?.style?.backgroundColor,
+                      onChange: backgroundColor => setStyle({
+                        backgroundColor
+                      }),
+                      enableAlpha: true,
+                      defaultValue: "#000"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(DropdownMenu, {
+                    label: __('Icon Color', 'wca-scrolltop'),
+                    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ColorIndicator, {
+                      colorValue: formData?.style?.color
+                    }),
+                    toggleProps: {
+                      style: {
+                        height: 'initial',
+                        minWidth: 'initial',
+                        padding: 0
+                      }
+                    },
+                    popoverProps: {
+                      focusOnMount: 'container',
+                      position: 'bottom',
+                      noArrow: false
+                    },
+                    children: () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ColorPicker, {
+                      color: formData?.style?.color,
+                      onChange: color => setStyle({
+                        color
+                      }),
+                      enableAlpha: true,
+                      defaultValue: "#000"
+                    })
+                  })]
+                })
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(BorderBoxControl, {
+                colors: colors,
+                label: __('Border', 'wca-scrolltop'),
+                value: formData?.style?.border,
+                onChange: border => setStyle({
+                  border
+                })
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RangeControl, {
+                label: __('Radius', 'wca-scrolltop'),
+                allowReset: true,
+                value: formData?.style?.borderRadius,
+                onChange: borderRadius => setStyle({
+                  borderRadius
+                }),
+                min: 0
+              })
+            })]
+          })]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "g-col-1",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(Card, {
+          className: "border shadow-none position-sticky sticky-top h-100",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(CardHeader, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h5", {
+              className: "text-uppercase fw-medium m-0",
+              children: __('Functionality', 'wca-scrolltop')
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(CardBody, {
+            style: {
+              color: 'rgb(30, 30, 30)'
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(SelectControl, {
+                label: __('Action', 'wca-scrolltop'),
+                value: formData?.action,
+                options: [{
+                  label: 'Scroll to Top',
+                  value: 'top'
+                }, {
+                  label: 'Scroll to Element',
+                  value: 'element'
+                }],
+                onChange: action => {
+                  if (action === 'top') {
+                    delete formData.element;
+                  }
+                  setFormData({
+                    ...formData,
+                    action
+                  });
+                }
+              })
+            }), formData?.action === 'element' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TextControl, {
+                  label: __('Element selector', 'wca-scrolltop'),
+                  value: formData?.element?.selector,
+                  onChange: selector => setFormData({
+                    ...formData,
+                    element: {
+                      ...formData.element,
+                      selector
+                    }
+                  }),
+                  help: __('CSS selector of the element, you are trying to scroll to. Eg: #myDivID, .myDivClass', 'wca-scrolltop')
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(NumberControl, {
+                  isShiftStepEnabled: true,
+                  spinControls: "custom",
+                  label: __('Element offset', 'wca-scrolltop'),
+                  value: formData?.element?.offset,
+                  onChange: offset => setFormData({
+                    ...formData,
+                    element: {
+                      ...formData.element,
+                      offset: parseInt(offset)
+                    }
+                  }),
+                  help: __('Negative value allowed. Use this to precisely set scroll position when you have overlapping elements.', 'wca-scrolltop')
+                })
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(NumberControl, {
+                isShiftStepEnabled: true,
+                spinControls: "custom",
+                label: __('Scroll offset', 'wca-scrolltop'),
+                help: __('Number of pixels to be scrolled before the button appears.', 'wca-scrolltop'),
+                min: 0,
+                value: formData?.scroll?.offset,
+                onChange: offset => setFormData({
+                  ...formData,
+                  scroll: {
+                    ...formData?.scroll,
+                    offset: parseInt(offset)
+                  }
+                })
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(NumberControl, {
+                isShiftStepEnabled: true,
+                spinControls: "custom",
+                label: __('Scroll duration', 'wca-scrolltop'),
+                help: __('Window scroll duration in milliseconds when the button is pressed.', 'wca-scrolltop'),
+                min: 100,
+                step: 10,
+                value: formData?.scroll?.duration,
+                onChange: duration => setFormData({
+                  ...formData,
+                  scroll: {
+                    ...formData?.scroll,
+                    duration: parseInt(duration)
+                  }
+                })
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TextControl, {
+                label: __('Class(es)', 'wca-scrolltop'),
+                value: formData?.classes,
+                onChange: classes => setFormData({
+                  ...formData,
+                  classes
+                }),
+                help: __('You can use utilities like: d-none, d-md-block; and so on.', 'wca-scrolltop')
+              })
+            })]
+          })]
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_admin_Components__WEBPACK_IMPORTED_MODULE_0__.PreviewButton, {
+      formData
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {
       style: {
-        height: 'initial',
-        minWidth: 'initial',
-        padding: 0
+        margin: '20px 0'
       }
-    },
-    popoverProps: {
-      focusOnMount: 'container',
-      position: 'bottom',
-      noArrow: false
-    }
-  }, () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(ColorPicker, {
-    color: formData?.style?.color,
-    onChange: color => setStyle({
-      color
-    }),
-    enableAlpha: true,
-    defaultValue: "#000"
-  }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(BorderBoxControl, {
-    colors: colors,
-    label: __('Border', 'wca-scrolltop'),
-    value: formData?.style?.border,
-    onChange: border => setStyle({
-      border
-    })
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RangeControl, {
-    label: __('Radius', 'wca-scrolltop'),
-    allowReset: true,
-    value: formData?.style?.borderRadius,
-    onChange: borderRadius => setStyle({
-      borderRadius
-    }),
-    min: 0
-  }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "g-col-1"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Card, {
-    className: "border shadow-none position-sticky sticky-top h-100"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardHeader, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h5", {
-    className: "text-uppercase fw-medium m-0"
-  }, __('Functionality', 'wca-scrolltop'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CardBody, {
-    style: {
-      color: 'rgb(30, 30, 30)'
-    }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectControl, {
-    label: __('Action', 'wca-scrolltop'),
-    value: formData?.action,
-    options: [{
-      label: 'Scroll to Top',
-      value: 'top'
-    }, {
-      label: 'Scroll to Element',
-      value: 'element'
-    }],
-    onChange: action => {
-      if (action === 'top') {
-        delete formData.element;
-      }
-      setFormData({
-        ...formData,
-        action
-      });
-    }
-  })), formData?.action === 'element' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
-    label: __('Element selector', 'wca-scrolltop'),
-    value: formData?.element?.selector,
-    onChange: selector => setFormData({
-      ...formData,
-      element: {
-        ...formData.element,
-        selector
-      }
-    }),
-    help: __('CSS selector of the element, you are trying to scroll to. Eg: #myDivID, .myDivClass', 'wca-scrolltop')
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(NumberControl, {
-    isShiftStepEnabled: true,
-    spinControls: "custom",
-    label: __('Element offset', 'wca-scrolltop'),
-    value: formData?.element?.offset,
-    onChange: offset => setFormData({
-      ...formData,
-      element: {
-        ...formData.element,
-        offset: parseInt(offset)
-      }
-    }),
-    help: __('Negative value allowed. Use this to precisely set scroll position when you have overlapping elements.', 'wca-scrolltop')
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(NumberControl, {
-    isShiftStepEnabled: true,
-    spinControls: "custom",
-    label: __('Scroll offset', 'wca-scrolltop'),
-    help: __('Number of pixels to be scrolled before the button appears.', 'wca-scrolltop'),
-    min: 0,
-    value: formData?.scroll?.offset,
-    onChange: offset => setFormData({
-      ...formData,
-      scroll: {
-        ...formData?.scroll,
-        offset: parseInt(offset)
-      }
-    })
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(NumberControl, {
-    isShiftStepEnabled: true,
-    spinControls: "custom",
-    label: __('Scroll duration', 'wca-scrolltop'),
-    help: __('Window scroll duration in milliseconds when the button is pressed.', 'wca-scrolltop'),
-    min: 100,
-    step: 10,
-    value: formData?.scroll?.duration,
-    onChange: duration => setFormData({
-      ...formData,
-      scroll: {
-        ...formData?.scroll,
-        duration: parseInt(duration)
-      }
-    })
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
-    label: __('Class(es)', 'wca-scrolltop'),
-    value: formData?.classes,
-    onChange: classes => setFormData({
-      ...formData,
-      classes
-    }),
-    help: __('You can use utilities like: d-none, d-md-block; and so on.', 'wca-scrolltop')
-  })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_admin_Components__WEBPACK_IMPORTED_MODULE_1__.PreviewButton, {
-    formData
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", {
-    style: {
-      margin: '20px 0'
-    }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
-    className: "button",
-    isPrimary: true,
-    isLarge: true,
-    icon: loading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Spinner, null),
-    onClick: () => {
-      setLoading(true);
-      saveSettings({
-        scrolltop: formData
-      }, handleNotice);
-    },
-    disabled: loading
-  }, loading ? '' : __('Save', 'wecodeart')));
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+      className: "button",
+      isPrimary: true,
+      isLarge: true,
+      icon: loading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Spinner, {}),
+      onClick: () => {
+        setLoading(true);
+        saveSettings({
+          scrolltop: formData
+        }, handleNotice);
+      },
+      disabled: loading,
+      children: loading ? '' : __('Save', 'wecodeart')
+    })]
+  });
 };
-}();
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=admin.js.map

@@ -104,7 +104,6 @@ const Options = (props) => {
                                         { label: __('Right', 'wca-scrolltop'), value: 'right' },
                                     ]}
                                     onChange={position => setFormData({ ...formData, position })}
-                                    __nextHasNoMarginBottom
                                 />
                             </p>
                             <p>
